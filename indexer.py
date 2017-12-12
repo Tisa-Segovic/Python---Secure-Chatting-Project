@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
-
 from util import *
 import string
 
-#%%
 class WordFreq:
     def __init__(self, word, freq):
         self.word = word
@@ -11,8 +8,7 @@ class WordFreq:
 
     def __str__(self):
         return self.word + ":" + str(self.freq)
-
-#%%    
+ 
 class Index:
     def __init__(self, name):
         self.name = name
@@ -81,10 +77,10 @@ class Index:
         for msg_num in self.index[key]:
             msg2 = proc_message(key, self.get_msg(msg_num))
             print (msg_num, ': ', msg2)
-        print('+++++++++++++++++++++++++++++++++++\n')
+        print('\n\n\n')
         
     def print_top_freq_word(self, num_tops, msg_too):
-        print('+++ top', num_tops, 'words+++++++++++++++')
+        print('\ntop', num_tops, 'words\n')
         for i in range(num_tops):
             wf = self.wd_freq_list[i]
             print(i, '->\t', wf)
@@ -92,7 +88,7 @@ class Index:
                 self.print_msg_with_key(wf.word)
     
     def print_stats(self):
-        print('\n+++++++++ stats ++++++++++++')
+        print('\nstats\n')
         print('there are', self.num_sections, 'sections')
         print('a total of', self.total_words, 'unique words')
         print('out of a total of', len(self.index), 'words')
