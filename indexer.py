@@ -102,6 +102,6 @@ class Index:
             for m in msgs:
                 ret_msg = ret_msg + m + '\n'
             return ret_msg
-            #return (string.join(msgs,'\n'))
+            return (string.join(msgs,'\n'))
         else:
             return ('')
