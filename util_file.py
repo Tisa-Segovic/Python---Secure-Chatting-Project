@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*-
-
 from time import *
 import random
 DELAY_BOUND = 10
 
-#%% convert stuff like 'blah,.,,.' to 'blah'
+# error-correct the punctuation and other characters potentially mistakenly entered by the user 'blah,.,,.' to 'blah'
 def word_cleanup(wd):
     wd = wd.lower()
     last_char = wd[-1]
@@ -16,7 +14,7 @@ def word_cleanup(wd):
             break
     return wd
     
-#%% replace 'blah' with '*blah*'
+# replace 'blah' with '*blah*'
 def proc_message(key, msg):
     new_key = '*' + key + '*'
     # the following line doesn't work, it will do things like f*or* for 'or'
@@ -28,19 +26,17 @@ def proc_message(key, msg):
     new_msg = new_msg.rstrip()
     return new_msg
 
-#%% add a timestamp to a message, with random delay
-def inc_wtime(last_time):   # last_time is a string, 
-                            # e.g. 'Mon Jul  7 12:27:55 2014'
+# adding the timestamp to a message
+def inc_wtime(last_time):
     last_time_sec   = mktime(strptime(last_time))
     this_time_sec   = last_time_sec + float(random.randint(1, DELAY_BOUND))
     this_time       = asctime(gmtime(this_time_sec))
     return this_time
 
-#%% add a timestamp to every message
+# adding the timestamp to every message, to know the message's metadata
 def add_wtime(in_file_name):
     in_file     = open(in_file_name, 'r')
-    out_file    = open(in_file_name + '.time', 'w')
-#%%    
+    out_file    = open(in_file_name + '.time', 'w') 
     now = ctime()
     m   = in_file.readline()
     while m != '':
@@ -50,5 +46,3 @@ def add_wtime(in_file_name):
         
     in_file.close()
     out_file.close()
-    
-#add_wtime('AllSonnets.txt')
