@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from chat_utils import *
 
 class ClientSM:
