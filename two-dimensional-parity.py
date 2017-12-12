@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
-
 from util import *
 import string
 
-#%%
 class WordFreq:
     def __init__(self, word, freq):
         self.word = word
@@ -11,8 +8,7 @@ class WordFreq:
 
     def __str__(self):
         return self.word + ":" + str(self.freq)
-
-#%%    
+   
 class Index:
     def __init__(self, name):
         self.name = name
@@ -26,7 +22,7 @@ class Index:
     def add_msg(self, m):
         self.msgs.append(m)
         
-    def get_msg_size(self):
+    def get_msg_size(self):  # Getter
         return len(self.msgs)
         
     def set_sect_begin_end(self, i, start, end):
@@ -50,7 +46,6 @@ class Index:
     
     def index_msg(self, m, l):
         words = m.split()
-        # remove the following two lines when run real
         if len(words) == 1:
             self.num_sections += 1
         else:
@@ -81,10 +76,10 @@ class Index:
         for msg_num in self.index[key]:
             msg2 = proc_message(key, self.get_msg(msg_num))
             print (msg_num, ': ', msg2)
-        print('+++++++++++++++++++++++++++++++++++\n')
+        print('\n\n\n')
         
     def print_top_freq_word(self, num_tops, msg_too):
-        print('+++ top', num_tops, 'words+++++++++++++++')
+        print('\ntop', num_tops, 'words\n')
         for i in range(num_tops):
             wf = self.wd_freq_list[i]
             print(i, '->\t', wf)
@@ -92,7 +87,7 @@ class Index:
                 self.print_msg_with_key(wf.word)
     
     def print_stats(self):
-        print('\n+++++++++ stats ++++++++++++')
+        print('\nstats\n')
         print('there are', self.num_sections, 'sections')
         print('a total of', self.total_words, 'unique words')
         print('out of a total of', len(self.index), 'words')
@@ -106,6 +101,6 @@ class Index:
             for m in msgs:
                 ret_msg = ret_msg + m + '\n'
             return ret_msg
-            #return (string.join(msgs,'\n'))
+            return (string.join(msgs,'\n'))
         else:
             return ('')
