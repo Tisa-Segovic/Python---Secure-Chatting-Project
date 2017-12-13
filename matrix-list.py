@@ -54,7 +54,6 @@ def error_correction(matrix):
             # all zeros - no error!
             continue
         for c in range(t.shape[1]):
-            # not very pythonic iteration, but we need the index
             if np.array_equal(t[:,c], syndrome[:,s]):
                 cv = matrix[s,c]
                 nv = (cv + 1) % 2
