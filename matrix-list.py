@@ -5,17 +5,41 @@ Fill out the following functions & Feel free to rename them! """
 import random
 import numpy as np
 
-def alnum2matrix(msg):
-    #hamming (8,4)
-    while len(msg) % 4 != 0:
-        msg.append(0)
-    m = np.reshape(np.array(msg), (-1, 4))
-    t = np.mat('1,0,0,0,0,1,1,1;\
-                0,1,0,0,1,0,1,1;\
-                0,0,1,0,1,1,0,1;\
-                0,0,0,1,1,1,1,0')
-    r =  np.dot(m, t)
-    return np.mod(r, 2)
+import random
+import numpy as np
+
+def numbers_into_matrix(msg):
+    matrix = []
+    message = []
+    for i in msg:
+        message.append(ord(i))
+
+    if len(msg) % 4 == 0:
+        len_row = (len(message) // 4)
+    else:
+        len_row = (len(message) // 4 + 1)
+
+    [matrix.append([]) for i in range(len_row)]
+
+    for i in range(len_row):
+        for a in range(4):
+            matrix[i].append(message.pop(0))
+
+    matrix_checksum = matrix[:]
+    for i in range(len_row):
+        row_total = 0
+        for e in matrix_checksum[i]:
+            row_total += e
+        matrix_checksum[i].append(row_total)
+
+    matrix_checksum.append([])
+
+    for i in range(5):
+        colum_total = 0
+        for a in range(len_row):
+            colum_total += matrix_checksum[a][i]
+        matrix_checksum[-1].append(colum_total)
+    return matrix_checksum
   
 def matrix_list2matrix_string(matrix):
     out = []
