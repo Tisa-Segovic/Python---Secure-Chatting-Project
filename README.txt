@@ -13,7 +13,7 @@ In the chat system, the server is responsible for passing a message from A to B 
 
 *Outcomes of the Project*
 
-The project is still currently in building.
+We have sucessfully built the project and finished building it. Some improvements that we could have made are to implement Fletcher's Checksum, instead of implementing the Simple Checksum. By doing this, we would significantly increase the speed of the checksum algorithm, as well as to overall improve the error-detection scheme.
 
 *Note on Collaboration*
 
