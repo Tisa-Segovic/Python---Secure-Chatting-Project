@@ -1,4 +1,5 @@
 import numpy as np
+
 def numbers_into_matrix(msg):
     matrix = []
     message = []
@@ -53,8 +54,6 @@ def matrix_string2matrix_list(mat_string):
         
     r = [int(bit) for sublist in r for bit in sublist]
     return r
-  
-def randomize_one_digit(matrix):
   
 def correct_error(matrix):
     len_row = len(matrix)
