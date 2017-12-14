@@ -1,7 +1,7 @@
 # Python-Secure-Chatting-Project
 *About the Project - General*
 
-This project is focused on reliable chatting server-clients system, more specifically on implementing the two-dimentional parity algorithm used to provide service of reliable-messaging. The project was done in collaborative work between Tisa Segovic and Ruofan (Brandon) Zhao at New York Univeristy, Shanghai Campus in Fall 2017 Semester. Mentor and consultant for the project was Xianbin Gu, as well as previous work of the students done in Introduction to Computer Science Class.
+This project is focused on reliable chatting server-clients system, more specifically on implementing the two-dimentional parity algorithm used to provide service of reliable-messaging. The project was done in collaborative work between Tisa Segovic and Ruofan (Brandon) Zhao at New York Univeristy, Shanghai Campus in Fall 2017 Semester. Mentor for the project was Xianbin Gu.
 
 *Inspiration for the Project*:
 
@@ -9,7 +9,7 @@ The project was particularly inspired by Chapter 5 - Error-Correcting Codes: Mis
 
 *How It Works*:
 
-In the chat system, the server is responsible for passing a message from A to B (two chat clients for example). The server emulates "the noisy location" by flipping bits of the message randomly as it goes along. Here, the checksum on the client-side is implemented, so that in case if the server is bad, the clients read each other's messages without any problem. Thus, it uses the fact that bits being passed carry enough information to recover what the environment might have corrupted from either or both of the client's messages. 
+In the chat system, the server is responsible for passing a message from A to B (two chat clients for example). The server emulates "the noisy location" by flipping bits of the message randomly as it goes along. Here, the checksum on the client-side is implemented, so that in case if some kind of noise occured, the clients read each other's messages without any problem.  
 
 *Outcomes of the Project*
 
