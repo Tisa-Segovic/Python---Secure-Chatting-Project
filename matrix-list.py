@@ -1,13 +1,4 @@
-
-""" To do by Brandon - let me know when you have finished!
-Fill out the following functions & Feel free to rename them! """
-
-import random
 import numpy as np
-
-import random
-import numpy as np
-
 def numbers_into_matrix(msg):
     matrix = []
     message = []
@@ -65,23 +56,39 @@ def matrix_string2matrix_list(mat_string):
   
 def randomize_one_digit(matrix):
   
-def error_correction(matrix):
-    t = np.mat('0,1,1,1,1,0,0,0;\
-               1,0,1,1,0,1,0,0;\
-               1,1,0,1,0,0,1,0;\
-               1,1,1,0,0,0,0,1')
-    m = np.reshape(np.array(matrix), (-1, 8)).T
-    r = np.dot(t, matrix)
-    syndrome= np.mod(r, 2)
-    for s in range(syndrome.shape[1]):
-        if not np.any(syndrome[:,s]):
-            # all zeros - no error!
-            continue
-        for c in range(t.shape[1]):
-            if np.array_equal(t[:,c], syndrome[:,s]):
-                cv = matrix[s,c]
-                nv = (cv + 1) % 2
-                matrix.itemset((s,c), nv)
+def correct_error(matrix):
+    len_row = len(matrix)
+    len_column = 5
+    error_row = None
+    error_column = None
+    error_row_sum = None  # For the actual matrix code
+
+    for row in range(len_row - 1):  # For error row
+        if np.sum(matrix[row][:4]) != matrix[row][4]:
+            error_row = row
+            error_row_sum = np.sum(matrix[row][:4])
+
+    for col in range(len_column - 1):  # For error column
+        col_sum = 0
+        for i in range(len_row - 1):
+            col_sum += matrix[i][col]
+        if col_sum != matrix[-1][col]:
+            error_column = col
+
+    if error_row == None and error_column == None:  # No error
+        matrix[len_row - 1][len_column - 1] = (
+        int(matrix[len_row - 1][0]) + int(matrix[len_row - 1][1]) + int(matrix[len_row - 1][2]) + int(
+            matrix[len_row - 1][3]))
+    elif error_row == None and error_column != None:  # Matrix row error
+        m = 0
+        for row in range(len_row - 1):
+            m += matrix[row][error_column]
+        matrix[-1][error_column] = m
+    elif error_column == None and error_row != None:  # Matrix column error
+        n = 0
+        for col in range(len_column - 1):
+            n += matrix[error_row][col]
+        matrix[error_row][-1] = n
     return matrix
   
 def matrix2alnum(matrix):
