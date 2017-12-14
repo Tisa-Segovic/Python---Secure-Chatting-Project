@@ -33,27 +33,21 @@ def numbers_into_matrix(msg):
         matrix_checksum[-1].append(colum_total)
     return matrix_checksum
   
-def matrix_list2matrix_string(matrix):
-    out = []
-    for i in range(np.floor(len(matrix)/7)):
-        s = i * 7
-        # this is gross
-        cs = matrix[s:s+7]
-        cs = '0b' + ''.join([str(c) for c in cs])
-        out.append(int(cs, 2))
-    st = ''.join([chr(o) for o in out])
-    return str(st)
+def list_into_string(matrix):
+    myString = str(matrix)
+    return myString
   
-def matrix_string2matrix_list(mat_string):
-    r = list(mat_string)
-        # convert to binary representation
-    r = ['{:07b}'.format(ord(x)) for x in r]
-        # split the binary into
-    r = [[bit for bit in x] for x in r]
-        # flatten it and convert to integers
-        
-    r = [int(bit) for sublist in r for bit in sublist]
-    return r
+def string_into_matrix(mat_string):
+    mat_string = mat_string.lstrip('[[')
+    mat_string = mat_string.rstrip(']]')
+    matrix_list = []
+    for i in mat_string.split('], ['):
+        sublist = []
+        for j in i.split(','):
+            sublist.append(int(j))
+        matrix_list.append(sublist)
+
+    return matrix_list
   
 def correct_error(matrix):
     len_row = len(matrix)
@@ -90,11 +84,14 @@ def correct_error(matrix):
         matrix[error_row][-1] = n
     return matrix
   
-def matrix2alnum(matrix):
-    i = np.mat('1,0,0,0,0,0,0,0;\
-                0,1,0,0,0,0,0,0;\
-                0,0,1,0,0,0,0,0;\
-                0,0,0,1,0,0,0,0')
-    r = np.dot(i, matrix.T)
-    ret = r.T.reshape((1,-1)).tolist()[0]
-    return ret    
+def back_to_ASCII(matrix):
+    matrix = np.array(matrix)
+    msg = ""
+    len_row = int(matrix.size / 5)
+    len_column = 5
+    for row in range(len_row - 1):
+        for column in range(len_column - 1):
+            if int(matrix[row][column]) != 0:
+                msg += chr(matrix[row][column])
+    msg = str(msg)
+    return msg 
